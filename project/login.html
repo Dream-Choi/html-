@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인 - 고양이 밈 천국</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gradient-to-r from-cyan-500 to-blue-500 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center mb-6">🐱 고양이 밈 천국 로그인 🐱</h1>
+        <form id="login-form" class="space-y-4">
+            <div>
+                <label for="username" class="block mb-1">사용자 이름</label>
+                <input type="text" id="username" class="w-full p-2 border rounded" required>
+            </div>
+            <div>
+                <label for="password" class="block mb-1">비밀번호</label>
+                <input type="password" id="password" class="w-full p-2 border rounded" required>
+            </div>
+            <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">로그인</button>
+        </form>
+        <div class="mt-4 text-center">
+            <a href="signup.html" class="text-blue-600 hover:underline">계정이 없으신가요? 회원가입</a>
+        </div>
+        <div class="mt-4 text-center">
+            <a href="index.html" class="text-gray-600 hover:underline">홈으로 돌아가기</a>
+        </div>
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('login-form');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            console.log('로그인 데이터:', { username, password });
+            // 여기에 실제 로그인 로직을 구현하세요
+            alert('로그인 성공!');
+            loginForm.reset();
+        });
+    </script>
+</body>
+</html>
+

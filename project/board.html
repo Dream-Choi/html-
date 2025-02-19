@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고양이 밈 게시판</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gradient-to-r from-green-400 to-blue-500">
+    <main class="container mx-auto px-4 py-8">
+        <h1 class="text-4xl font-bold text-center text-white mb-8">🐱 고양이 밈 게시판 🐱</h1>
+
+        <div class="bg-white rounded-lg shadow-md mb-8 p-6">
+            <h2 class="text-2xl font-bold mb-4">새 밈 올리기</h2>
+            <form id="meme-form" class="space-y-4">
+                <div>
+                    <label for="meme-description" class="block mb-2">밈 설명</label>
+                    <textarea id="meme-description" class="w-full p-2 border rounded" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label for="meme-image" class="block mb-2">이미지 선택</label>
+                    <input type="file" id="meme-image" accept="image/*" required>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">밈 올리기</button>
+            </form>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6" id="meme-list">
+            <!-- 밈 게시물이 여기에 동적으로 추가됩니다 -->
+        </div>
+
+        <div class="mt-8 text-center">
+            <a href="index.html" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">홈으로 돌아가기</a>
+        </div>
+    </main>
+
+    <script>
+        const memeForm = document.getElementById('meme-form');
+        const memeList = document.getElementById('meme-list');
+
+        memeForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const description = document.getElementById('meme-description').value;
+            const imageFile = document.getElementById('meme-image').files[0];
+
+            if (description && imageFile) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    addMemeToList(description, event.target.result);
+                };
+                reader.readAsDataURL(imageFile);
+            }
+
+            memeForm.reset();
+        });
+
+        function addMemeToList(description, imageUrl) {
+            const memeElement = document.createElement('div');
+            memeElement.className = 'bg-white bg-opacity-80 rounded-lg shadow-md';
+            memeElement.innerHTML = `
+                <div class="p-4">
+                    <img src="${imageUrl}" alt="고양이 밈" class="w-full h-64 object-cover rounded-md mb-4">
+                    <p>${description}</p>
+                </div>
+            `;
+            memeList.prepend(memeElement);
+        }
+
+        // 초기 밈 데이터 (예시)
+        addMemeToList("사람이 참치캔을 열 때 나의 표정...", "https://placekitten.com/300/300");
+        addMemeToList("빨간 점을 잡으려고 할 때 나", "https://placekitten.com/301/300");
+    </script>
+</body>
+</html>
+
